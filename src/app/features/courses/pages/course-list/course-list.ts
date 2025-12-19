@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CourseService, CourseVm } from '../../services/course';
 
-type CourseVm = {
-  id: number;
-  title: string;
-  credits: number;
-  startDate: string;
-  endDate: string;
-  teacherId?: number | null;
-};
+
+
 
 @Component({
   selector: 'app-course-list',
