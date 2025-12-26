@@ -1,0 +1,29 @@
+.card {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 18px;
+  background: #fff;
+}
+
+.actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+.primary, .secondary {
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.primary {
+  background: #111;
+  color: #fff;
+}
+
+.secondary {
+  border: 1px solid #ddd;
+  color: #111;
+}

@@ -1,0 +1,29 @@
+
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <a routerLink="/">CourseManager</a>
+      <small>Academic Course Management</small>
+    </div>
+
+    <div class="links">
+      <a routerLink="/" class="btn">Home</a>
+
+      <ng-container *ngIf="!auth.isLoggedIn()">
+        <a routerLink="/login" class="btn">Login</a>
+        <a routerLink="/register" class="btn primary">Sign up</a>
+      </ng-container>
+
+      <ng-container *ngIf="auth.isLoggedIn()">
+        <a routerLink="/courses" class="btn">Courses</a>
+        <a routerLink="/teachers" class="btn">Teachers</a>
+        <button class="btn" (click)="logout()">Logout</button>
+      </ng-container>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

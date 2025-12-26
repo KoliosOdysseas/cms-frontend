@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TeacherService, TeacherVm } from '../../services/teacher';
 
+// Teacher List Page
 @Component({
   selector: 'app-teacher-list',
   standalone: true,
@@ -9,6 +10,8 @@ import { TeacherService, TeacherVm } from '../../services/teacher';
   templateUrl: './teacher-list.html',
   styleUrl: './teacher-list.scss',
 })
+
+// Teacher List Component
 export class TeacherList {
   teachers: TeacherVm[] = [];
 
