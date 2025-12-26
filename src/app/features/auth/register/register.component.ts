@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { AuthApiService, UserRole } from '../../../core/services/auth-api.service';
 
@@ -10,7 +9,6 @@ import { AuthApiService, UserRole } from '../../../core/services/auth-api.servic
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  // styleUrls: ['./register.component.scss'], // βάλε το μόνο αν έχεις scss
 })
 export class RegisterComponent {
   userName = '';
@@ -21,7 +19,7 @@ export class RegisterComponent {
   error = '';
   success = '';
 
-  constructor(private api: AuthApiService, private router: Router) {}
+  constructor(private api: AuthApiService) {}
 
   onSubmit(): void {
     this.loading = true;
@@ -36,7 +34,6 @@ export class RegisterComponent {
       next: () => {
         this.loading = false;
         this.success = 'Account created! You can login now.';
-        this.router.navigateByUrl('/login');
       },
       error: (err) => {
         this.loading = false;
