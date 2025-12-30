@@ -73,7 +73,7 @@
           @for (s of enrolledStudents; track s.id) {
             <tr>
               <td>{{ s.fullName }}</td>
-              <td>{{ s.email ?? '-' }}</td>
+              <td>{{ s.email }}</td>
               <td>{{ s.phone ?? '-' }}</td>
               <td class="actions">
                 <button class="link danger" (click)="unenroll(s.id)">
