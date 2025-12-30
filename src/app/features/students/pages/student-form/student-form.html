@@ -1,0 +1,54 @@
+<header class="page-header">
+  <div class="title">
+    <h1>{{ isEdit ? 'Edit Student' : 'Add Student' }}</h1>
+    <p>{{ isEdit ? 'Update student details' : 'Create a new student record' }}</p>
+  </div>
+
+  <a class="btn btn-ghost" routerLink="/students">
+    Back
+  </a>
+</header>
+
+<div class="state error" *ngIf="error">
+  <span class="icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 9v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M10.3 4.6 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.6a2 2 0 0 0-3.4 0Z"
+            stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  {{ error }}
+</div>
+
+<div class="state" *ngIf="loading">
+  <span class="spinner" aria-hidden="true"></span>
+  Loading…
+</div>
+
+<div class="card" *ngIf="!loading">
+  <form class="form" (ngSubmit)="save()">
+    <label>
+      Full name
+      <input [(ngModel)]="model.fullName" name="fullName" required />
+    </label>
+
+    <label>
+      Email
+      <input [(ngModel)]="model.email" name="email" type="email" required />
+    </label>
+
+    <label>
+      Phone
+      <input [(ngModel)]="model.phone" name="phone" />
+    </label>
+
+    <div class="actions">
+      <button class="btn btn-primary" type="submit">
+        {{ isEdit ? 'Save Changes' : 'Create Student' }}
+      </button>
+
+      <button class="btn btn-ghost" type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
