@@ -41,12 +41,20 @@
           <td>{{ c.startDate }}</td>
           <td>{{ c.endDate }}</td>
           <td>{{ c.teacherId ?? '-' }}</td>
+
           <td class="actions">
             <a
               class="link"
               [routerLink]="['/courses', c.id, 'edit']"
             >
               Edit
+            </a>
+
+            <a
+              class="link"
+              [routerLink]="['/courses', c.id, 'enrollments']"
+            >
+              Enrollments
             </a>
 
             <button

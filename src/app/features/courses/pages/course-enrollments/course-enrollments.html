@@ -1,0 +1,89 @@
+<header class="page-header">
+  <div>
+    <h1>Enrollments</h1>
+    <p class="subtitle">
+      Course: <strong>{{ courseTitle }}</strong>
+    </p>
+  </div>
+
+  <a class="btn" routerLink="/courses">← Back to Courses</a>
+</header>
+
+@if (loading) {
+  <p>Loading enrollments...</p>
+}
+
+@if (!loading && error) {
+  <p class="error">{{ error }}</p>
+}
+
+@if (!loading && !error) {
+  <section class="card">
+    <h2>Add student</h2>
+
+    <div class="row">
+      <select
+        [(ngModel)]="selectedStudentId"
+        [disabled]="availableStudents.length === 0"
+      >
+        @if (availableStudents.length === 0) {
+          <option [ngValue]="null">No available students</option>
+        } @else {
+          @for (s of availableStudents; track s.id) {
+            <option [ngValue]="s.id">
+              {{ s.fullName }} — {{ s.email }}
+            </option>
+          }
+        }
+      </select>
+
+      <button
+        class="btn"
+        (click)="enroll()"
+        [disabled]="!selectedStudentId || availableStudents.length === 0"
+      >
+        Enroll
+      </button>
+    </div>
+
+    @if (availableStudents.length === 0) {
+      <p class="muted">All students are already enrolled in this course.</p>
+    }
+  </section>
+
+  <section class="card">
+    <h2>Enrolled students</h2>
+
+    @if (enrolledStudents.length === 0) {
+      <p class="muted">No students enrolled yet.</p>
+    }
+
+    @if (enrolledStudents.length > 0) {
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Full name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (s of enrolledStudents; track s.id) {
+            <tr>
+              <td>{{ s.fullName }}</td>
+              <td>{{ s.email ?? '-' }}</td>
+              <td>{{ s.phone ?? '-' }}</td>
+              <td class="actions">
+                <button class="link danger" (click)="unenroll(s.id)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+}
