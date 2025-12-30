@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CourseService, CourseVm } from '../../services/course';
 
-
-
+import { CourseApiService } from '../../../../core/services/course-api.service';
+import { Course } from '../../../../core/models/course.models';
 
 @Component({
   selector: 'app-course-list',
@@ -13,30 +12,44 @@ import { CourseService, CourseVm } from '../../services/course';
   styleUrl: './course-list.scss',
 })
 export class CourseList {
-  courses: CourseVm[] = [
-    {
-      id: 1,
-      title: 'Intro to C#',
-      credits: 5,
-      startDate: '2025-10-01',
-      endDate: '2025-12-15',
-      teacherId: 2,
-    },
-    {
-      id: 2,
-      title: 'Databases (SQL Server)',
-      credits: 6,
-      startDate: '2025-10-10',
-      endDate: '2026-01-20',
-      teacherId: null,
-    },
-  ];
+  courses: Course[] = [];
+  loading = false;
+  error = '';
 
-  onDelete(courseId: number) {
-    // placeholder: αργότερα θα καλεί API
+  constructor(private courseApi: CourseApiService) {
+    this.loadCourses();
+  }
+
+  loadCourses(): void {
+    this.loading = true;
+    this.error = '';
+
+    this.courseApi.getAll().subscribe({
+      next: (data) => {
+        this.courses = data;
+      },
+      error: () => {
+        this.error = 'Αποτυχία φόρτωσης μαθημάτων.';
+        this.loading = false;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  onDelete(courseId: number): void {
     const ok = confirm(`Delete course with id ${courseId}?`);
     if (!ok) return;
 
-    this.courses = this.courses.filter(c => c.id !== courseId);
+    this.courseApi.delete(courseId).subscribe({
+      next: () => {
+        // refresh list after successful delete
+        this.loadCourses();
+      },
+      error: () => {
+        this.error = 'Αποτυχία διαγραφής.';
+      },
+    });
   }
 }

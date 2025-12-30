@@ -4,31 +4,60 @@
   <a class="btn" routerLink="/courses/new">+ Add Course</a>
 </header>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Credits</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Teacher</th>
-      <th class="actions">Actions</th>
-    </tr>
-  </thead>
+<!-- Loading -->
+@if (loading) {
+  <p>Loading courses...</p>
+}
 
-  <tbody>
-    @for (c of courses; track c.id) {
+<!-- Error -->
+@if (!loading && error) {
+  <p class="error">{{ error }}</p>
+}
+
+<!-- Empty state -->
+@if (!loading && !error && courses.length === 0) {
+  <p>No courses found.</p>
+}
+
+<!-- Table -->
+@if (!loading && !error && courses.length > 0) {
+  <table class="table">
+    <thead>
       <tr>
-        <td>{{ c.title }}</td>
-        <td>{{ c.credits }}</td>
-        <td>{{ c.startDate }}</td>
-        <td>{{ c.endDate }}</td>
-        <td>{{ c.teacherId ?? '-' }}</td>
-        <td class="actions">
-          <a class="link" [routerLink]="['/courses', c.id, 'edit']">Edit</a>
-          <button class="link danger" (click)="onDelete(c.id)">Delete</button>
-        </td>
+        <th>Title</th>
+        <th>Credits</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Teacher</th>
+        <th class="actions">Actions</th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      @for (c of courses; track c.id) {
+        <tr>
+          <td>{{ c.title }}</td>
+          <td>{{ c.credits }}</td>
+          <td>{{ c.startDate }}</td>
+          <td>{{ c.endDate }}</td>
+          <td>{{ c.teacherId ?? '-' }}</td>
+          <td class="actions">
+            <a
+              class="link"
+              [routerLink]="['/courses', c.id, 'edit']"
+            >
+              Edit
+            </a>
+
+            <button
+              class="link danger"
+              (click)="onDelete(c.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
