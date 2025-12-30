@@ -1,1 +1,31 @@
-<p>teacher-form works!</p>
+<header class="page-header">
+  <h1>{{ isEdit ? 'Edit Teacher' : 'Add Teacher' }}</h1>
+</header>
+
+<div class="state" *ngIf="loading">Loading…</div>
+<div class="state error" *ngIf="error">{{ error }}</div>
+
+<form class="form" (ngSubmit)="save()" *ngIf="!loading">
+  <label>
+    Full name
+    <input [(ngModel)]="model.fullName" name="fullName" required />
+  </label>
+
+  <label>
+    Email
+    <input [(ngModel)]="model.email" name="email" type="email" required />
+  </label>
+
+  <label>
+    Phone
+    <input [(ngModel)]="model.phone" name="phone" />
+  </label>
+
+  <div class="actions">
+    <button class="btn primary" type="submit">
+      {{ isEdit ? 'Save Changes' : 'Create Teacher' }}
+    </button>
+
+    <button class="btn" type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>
