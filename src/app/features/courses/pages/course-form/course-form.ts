@@ -32,6 +32,8 @@ export class CourseForm {
     endDate: '',
     teacherId: null,
   };
+  startDateError: string = '';
+  endDateError: string = '';
 
   constructor(
     private courseApi: CourseApiService,
@@ -121,5 +123,32 @@ export class CourseForm {
 
   onCancel(): void {
     this.router.navigateByUrl('/courses');
+  }
+
+  validateForm(): void {
+     this.startDateError = '';
+    if (!this.model.startDate || this.model.startDate.trim().length === 0) {
+      this.startDateError = 'Η ημερομηνία έναρξης είναι υποχρεωτική.';
+    } else if (!this.model.endDate || this.model.endDate.trim().length === 0) {
+      this.error = 'Η ημερομηνία λήξης είναι υποχρεωτική.';
+    }
+  }
+
+  checkValidity(): void {
+    this.startDateError = '';
+    if (!this.model.startDate || this.model.startDate.trim().length === 0) {
+      this.startDateError = 'Η ημερομηνία έναρξης είναι υποχρεωτική.';
+    }else{
+      this.startDateError = '';
+    }
+  }
+
+  checkValidityForEndDate(): void {
+    this.endDateError = '';
+    if (!this.model.endDate || this.model.endDate.trim().length === 0) {
+      this.endDateError = 'Η ημερομηνία λήξης είναι υποχρεωτική.';
+    }else{
+      this.endDateError = '';
+    }
   }
 }

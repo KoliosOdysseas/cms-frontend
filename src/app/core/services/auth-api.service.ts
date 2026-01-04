@@ -7,7 +7,8 @@ export type UserRole = 'Admin' | 'Teacher' | 'Student';
 export interface RegisterRequest {
   userName: string;
   password: string;
-  role: UserRole;
+  email: string;
+  RoleName: string;
 }
 
 export interface LoginRequest {
@@ -25,8 +26,8 @@ export class AuthApiService {
 
   constructor(private http: HttpClient) {}
 
-  register(req: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/register`, req);
+  register(req: RegisterRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/register`, req);
   }
 
   login(req: LoginRequest): Observable<AuthResponse> {

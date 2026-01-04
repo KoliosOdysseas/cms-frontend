@@ -109,8 +109,10 @@
                 name="startDate"
                 [(ngModel)]="model.startDate"
                 required
+                (blur)="checkValidity()"
               />
             </div>
+            <div *ngIf="startDateError" style="color: red;"> {{startDateError}}</div>
           </div>
 
           <!-- End Date -->
@@ -133,8 +135,10 @@
                 name="endDate"
                 [(ngModel)]="model.endDate"
                 required
+                (blur)="checkValidityForEndDate()"
               />
             </div>
+            <div *ngIf="endDateError" style="color: red;"> {{endDateError}}</div>
           </div>
 
           <!-- Teacher Id -->
@@ -185,7 +189,7 @@
         </div>
 
         <div class="actions">
-          <button class="btn primary" type="submit" [disabled]="saving">
+          <button class="btn primary" type="submit" [disabled]="saving" (click)="validateForm()">
             <span class="icon" aria-hidden="true">
               <!-- Save -->
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">

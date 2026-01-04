@@ -1,2 +1,47 @@
-<h2>Sign up</h2>
-<p>Coming next: register with role selection.</p>
+<div class="register-container">
+  <h2>Register</h2>
+  <form>
+    <div class="form-group">
+      <label for="userName">UserName:</label>
+      <input 
+        type="text" 
+        id="userName" 
+        name="userName" 
+        [(ngModel)]="userName"
+        required>
+    </div>
+<div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="text" 
+        id="email" 
+        name="email" 
+        [(ngModel)]="email"
+        required> 
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input 
+        type="text" 
+        id="password" 
+        name="password" 
+        [(ngModel)]="password"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="role">Role:</label>
+      <select 
+        id="role" 
+        name="role" 
+        [(ngModel)]="role"
+        required
+       (change)="selectionRole($event)"
+        >
+        <option [value]="roleStudent" >Student</option>
+        <option [value]="roleTeacher">Teacher</option>
+        <option [value]="roleAdmin">Admin</option>
+      </select>
+    </div>
+    <button type="submit" (click)="onSubmit()">Register</button>
+  </form>
+</div>

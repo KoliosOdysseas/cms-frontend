@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherService } from '../../services/teacher';
 import {
   TeacherCreateDto,
@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'app-teacher-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './teacher-form.html',
   styleUrl: './teacher-form.scss',
 })

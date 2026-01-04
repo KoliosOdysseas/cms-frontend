@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AuthApiService, UserRole } from '../../../core/services/auth-api.service';
+import { AuthApiService } from '../../../core/services/auth-api.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,31 +15,39 @@ import { AuthApiService, UserRole } from '../../../core/services/auth-api.servic
 export class RegisterComponent {
   userName = '';
   password = '';
-  role: UserRole = 'Student';
-
-  loading = false;
+  email = '';
+  roleStudent: UserRole = UserRole.Student;
+  roleTeacher: UserRole = UserRole.Teacher;
+  roleAdmin: UserRole = UserRole.Admin;
+  role: UserRole = this.roleStudent;
   error = '';
   success = '';
-
-  constructor(private api: AuthApiService) {}
+  private returnUrl = '/courses';
+  constructor(private api: AuthApiService, private auth: AuthService, private router: Router, private route: ActivatedRoute) { 
+     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] ||
+'/courses';
+  }
 
   onSubmit(): void {
-    this.loading = true;
+    if (!this.userName.trim() || !this.password.trim()) {
+      this.error = 'Username and password are required.';
+      return;
+    }
+
     this.error = '';
     this.success = '';
 
     this.api.register({
       userName: this.userName.trim(),
-      password: this.password,
-      role: this.role,
+      password: this.password.trim(),
+      email: this.email.trim(),
+      RoleName: this.role,
     }).subscribe({
-      next: () => {
-        this.loading = false;
-        this.success = 'Account created! You can login now.';
+      next: (res) => {
+        this.auth.setToken(res.token);
+        this.router.navigateByUrl(this.returnUrl);
       },
       error: (err) => {
-        this.loading = false;
-
         if (err?.status === 409) {
           this.error = 'Username already exists.';
           return;
@@ -47,4 +57,14 @@ export class RegisterComponent {
       }
     });
   }
+
+  selectionRole( role: Event): void {
+    this.role = (role.target as HTMLInputElement).value as UserRole;
+  }
+}
+
+enum UserRole {
+  Admin = 'Admin',
+  Teacher = 'Teacher',
+  Student = 'Student',
 }
