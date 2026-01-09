@@ -25,6 +25,7 @@
   border-collapse: collapse;
 
   th, td { padding: 16px 14px; text-align: left; vertical-align: middle; }
+
   thead th {
     font-weight: 700;
     opacity: .75;
@@ -81,6 +82,11 @@
   }
 
   &:hover { box-shadow: 0 10px 22px rgba(0,0,0,.08); }
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 }
 
 .btn-primary {
@@ -150,4 +156,116 @@
 
   .empty-title { font-weight: 800; font-size: 18px; }
   .empty-sub { opacity: .75; }
+}
+
+/* ---------- INFO EXPAND ---------- */
+
+.info-cell {
+  padding: 0 !important;
+  border-bottom: 1px solid rgba(0,0,0,.06) !important;
+  background: rgba(0,0,0,.01);
+}
+
+.info-box {
+  margin: 0;
+  padding: 14px 14px 16px;
+  border-top: 1px solid rgba(0,0,0,.06);
+  background: rgba(255,255,255,.75);
+}
+
+.info-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  opacity: .85;
+}
+
+.info-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.info-title {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.info-courses {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.course {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.9);
+}
+
+.course-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(0,0,0,.02);
+  font-size: 12px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.chips {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.icon-only {
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.icon-only:hover {
+  background: rgba(0,0,0,.06);
+}
+
+.icon-only:active {
+  background: rgba(0,0,0,.10);
+}
+
+.icon-only .icon {
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.icon-only svg {
+  width: 18px;
+  height: 18px;
 }

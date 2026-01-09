@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+
 import { TeacherService } from '../../services/teacher';
 import { TeacherReadDto } from '../../../../core/models/teacher.models';
+import { TeacherInfo } from '../../../../core/models/teacher-info.model';
 
 @Component({
   selector: 'app-teacher-list',
@@ -21,6 +23,12 @@ export class TeacherList {
 
   // keeps track of currently deleting teacher
   deletingId: number | null = null;
+
+  // INFO (read-only details)
+  expandedTeacherId: number | null = null;
+  infoLoadingId: number | null = null;
+  infoCache = new Map<number, TeacherInfo>();
+  infoError = new Map<number, string>();
 
   ngOnInit(): void {
     this.loadTeachers();
@@ -74,5 +82,42 @@ export class TeacherList {
   // helper για template
   isDeleting(id: number): boolean {
     return this.deletingId === id;
+  }
+
+  // -------- INFO --------
+
+  toggleInfo(id: number): void {
+    // collapse if already open
+    if (this.expandedTeacherId === id) {
+      this.expandedTeacherId = null;
+      return;
+    }
+
+    this.expandedTeacherId = id;
+
+    // use cache
+    if (this.infoCache.has(id)) return;
+
+    this.infoLoadingId = id;
+    this.infoError.delete(id);
+
+    this.teacherService.getInfo(id).subscribe({
+      next: (data) => {
+        this.infoCache.set(id, data);
+        this.infoLoadingId = null;
+      },
+      error: (err) => {
+        this.infoLoadingId = null;
+
+        const status = err?.status;
+        if (status === 401 || status === 403) this.infoError.set(id, 'Not authorized.');
+        else if (status === 404) this.infoError.set(id, 'Teacher not found.');
+        else this.infoError.set(id, err?.error?.message ?? 'Failed to load info.');
+      },
+    });
+  }
+
+  getInfo(id: number): TeacherInfo | null {
+    return this.infoCache.get(id) ?? null;
   }
 }
