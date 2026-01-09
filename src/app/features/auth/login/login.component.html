@@ -1,19 +1,78 @@
-<h2>Login</h2>
+<section class="auth-shell">
+  <div class="auth-card">
 
-<form (ngSubmit)="onSubmit()" style="max-width: 320px;">
-  <div>
-    <label>UserName</label><br />
-    <input name="userName" [(ngModel)]="userName" required />
+    <!-- LEFT PANEL -->
+    <aside class="auth-left" aria-hidden="true">
+      <div class="auth-left-inner">
+        <div class="logo-badge">CourseManager</div>
+
+        <div class="illus">
+          <div class="illus-circle"></div>
+          <div class="illus-book"></div>
+          <div class="illus-card"></div>
+          <div class="illus-lines"></div>
+        </div>
+
+        <h3>Manage courses the academic way</h3>
+        <p>
+          Sign in to access Courses, Teachers, Students and Enrollments — all secured with JWT & role-based authorization.
+        </p>
+
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="auth-right">
+      <header class="auth-header">
+        <h1>Welcome back</h1>
+        <p>Sign in to continue to CourseManager.</p>
+      </header>
+
+      <form class="auth-form" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label for="userName">Username</label>
+          <input
+            id="userName"
+            name="userName"
+            type="text"
+            [(ngModel)]="userName"
+            autocomplete="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            [(ngModel)]="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button class="btn-primary" type="submit" [disabled]="loading">
+          {{ loading ? 'Signing in...' : 'Sign In' }}
+        </button>
+
+        <p class="auth-footer">
+          New here?
+          <a routerLink="/register">Create an account</a>
+        </p>
+
+        <p class="msg error" *ngIf="error">{{ error }}</p>
+        
+      </form>
+    </main>
+
   </div>
-
-  <div style="margin-top: 10px;">
-    <label>Password</label><br />
-    <input name="password" type="password" [(ngModel)]="password" required />
-  </div>
-
-  <button style="margin-top: 12px;" type="submit" [disabled]="loading">
-    {{ loading ? 'Loading...' : 'Login' }}
-  </button>
-
-  <p *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</p>
-</form>
+</section>

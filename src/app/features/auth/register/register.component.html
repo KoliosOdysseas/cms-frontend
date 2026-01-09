@@ -1,47 +1,70 @@
-<div class="register-container">
-  <h2>Register</h2>
-  <form>
-    <div class="form-group">
-      <label for="userName">UserName:</label>
-      <input 
-        type="text" 
-        id="userName" 
-        name="userName" 
-        [(ngModel)]="userName"
-        required>
-    </div>
-<div class="form-group">
-      <label for="email">Email:</label>
-      <input 
-        type="text" 
-        id="email" 
-        name="email" 
-        [(ngModel)]="email"
-        required> 
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input 
-        type="text" 
-        id="password" 
-        name="password" 
-        [(ngModel)]="password"
-        required>
-    </div>
-    <div class="form-group">
-      <label for="role">Role:</label>
-      <select 
-        id="role" 
-        name="role" 
-        [(ngModel)]="role"
-        required
-       (change)="selectionRole($event)"
+<section class="auth-wrap">
+  <div class="auth-card">
+    <h1 class="auth-title">Register</h1>
+    <p class="auth-subtitle">Please fill in this form to create an account.</p>
+
+    <div class="divider"></div>
+
+    <form class="auth-form" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="userName">Username</label>
+        <input
+          id="userName"
+          name="userName"
+          type="text"
+          [(ngModel)]="userName"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Enter email"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Enter password"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="role">Role</label>
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="role"
+          (change)="selectionRole($event)"
+          required
         >
-        <option [value]="roleStudent" >Student</option>
-        <option [value]="roleTeacher">Teacher</option>
-        <option [value]="roleAdmin">Admin</option>
-      </select>
-    </div>
-    <button type="submit" (click)="onSubmit()">Register</button>
-  </form>
-</div>
+          <option [value]="roleStudent">Student</option>
+          <option [value]="roleTeacher">Teacher</option>
+          <option [value]="roleAdmin">Admin</option>
+        </select>
+      </div>
+
+      <button class="btn-green" type="submit">
+        Register
+      </button>
+
+      <p class="auth-footer">
+        Already have an account?
+        <a routerLink="/login">Sign in</a>
+      </p>
+    </form>
+  </div>
+</section>

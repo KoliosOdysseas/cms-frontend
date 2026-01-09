@@ -1,30 +1,35 @@
+<header id="topbar" class="cm-topbar">
 
+  <div class="cm-topbar-inner">
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <a routerLink="/">CourseManager</a>
-      <small>Academic Course Management</small>
-    </div>
+    <a routerLink="/" class="cm-brand">
+      <span class="cm-mark">CM</span>
+      <span class="cm-brand-text">
+        <strong>CourseManager</strong>
+        <small>Academic Course Management</small>
+      </span>
+    </a>
 
-    <div class="links">
-      <a routerLink="/" class="btn">Home</a>
+   
+    <nav class="cm-links center">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
 
       <ng-container *ngIf="!auth.isLoggedIn()">
-        <a routerLink="/login" class="btn">Login</a>
-        <a routerLink="/register" class="btn primary">Register</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <a routerLink="/register" routerLinkActive="active">Register</a>
       </ng-container>
 
       <ng-container *ngIf="auth.isLoggedIn()">
-        <a routerLink="/courses" class="btn">Courses</a>
-        <a routerLink="/teachers" class="btn">Teachers</a>
-        <a routerLink="/students" class="btn">Students</a>
-        <button class="btn" (click)="logout()">Logout</button>
+        <a routerLink="/courses" routerLinkActive="active">Courses</a>
+        <a routerLink="/teachers" routerLinkActive="active">Teachers</a>
+        <a routerLink="/students" routerLinkActive="active">Students</a>
+        <button class="nav-btn" type="button" (click)="logout()">Logout</button>
       </ng-container>
-    </div>
+    </nav>
+
   </div>
 </header>
 
-<main class="container">
+<main class="cm-container">
   <router-outlet></router-outlet>
 </main>

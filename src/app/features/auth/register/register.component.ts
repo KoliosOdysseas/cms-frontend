@@ -5,12 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { AuthApiService } from '../../../core/services/auth-api.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+ templateUrl: './register.component.html'
+  styleUrls: ['./register.component.scss']   // ✅ ΜΟΝΟ ΕΔΩ
+
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   userName = '';
