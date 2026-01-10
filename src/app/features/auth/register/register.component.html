@@ -1,70 +1,104 @@
-<section class="auth-wrap">
+<!-- register.component.html -->
+<section class="auth-shell">
   <div class="auth-card">
-    <h1 class="auth-title">Register</h1>
-    <p class="auth-subtitle">Please fill in this form to create an account.</p>
 
-    <div class="divider"></div>
+    <!-- LEFT PANEL -->
+    <aside class="auth-left" aria-hidden="true">
+      <div class="auth-left-inner">
+        <div class="logo-badge">CourseManager</div>
 
-    <form class="auth-form" (ngSubmit)="onSubmit()">
-      <div class="field">
-        <label for="userName">Username</label>
-        <input
-          id="userName"
-          name="userName"
-          type="text"
-          [(ngModel)]="userName"
-          placeholder="Enter username"
-          required
-        />
+        <div class="illus">
+          <div class="illus-circle"></div>
+          <div class="illus-book"></div>
+          <div class="illus-card"></div>
+          <div class="illus-lines"></div>
+        </div>
+
+        <h3>Create your account</h3>
+        <p>
+          Register to manage Courses, Teachers, Students and Enrollments — all secured with JWT & role-based authorization.
+        </p>
+
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
       </div>
+    </aside>
 
-      <div class="field">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          [(ngModel)]="email"
-          placeholder="Enter email"
-          required
-        />
-      </div>
+    <!-- RIGHT PANEL -->
+    <main class="auth-right">
+      <header class="auth-header">
+        <h1>Create account</h1>
+        <p>Please fill in this form to create an account.</p>
+      </header>
 
-      <div class="field">
-        <label for="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          [(ngModel)]="password"
-          placeholder="Enter password"
-          required
-        />
-      </div>
+      <form class="auth-form" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label for="userName">Username</label>
+          <input
+            id="userName"
+            name="userName"
+            type="text"
+            [(ngModel)]="userName"
+            placeholder="Enter username"
+            autocomplete="username"
+            required
+          />
+        </div>
 
-      <div class="field">
-        <label for="role">Role</label>
-        <select
-          id="role"
-          name="role"
-          [(ngModel)]="role"
-          (change)="selectionRole($event)"
-          required
-        >
-          <option [value]="roleStudent">Student</option>
-          <option [value]="roleTeacher">Teacher</option>
-          <option [value]="roleAdmin">Admin</option>
-        </select>
-      </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Enter email"
+            autocomplete="email"
+            required
+          />
+        </div>
 
-      <button class="btn-green" type="submit">
-        Register
-      </button>
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            [(ngModel)]="password"
+            placeholder="Enter password"
+            autocomplete="new-password"
+            required
+          />
+        </div>
 
-      <p class="auth-footer">
-        Already have an account?
-        <a routerLink="/login">Sign in</a>
-      </p>
-    </form>
+        <div class="field">
+          <label for="role">Role</label>
+          <select
+            id="role"
+            name="role"
+            [(ngModel)]="role"
+            (change)="selectionRole($event)"
+            required
+          >
+            <option [value]="roleStudent">Student</option>
+            <option [value]="roleTeacher">Teacher</option>
+            <option [value]="roleAdmin">Admin</option>
+          </select>
+        </div>
+
+        <button class="btn-primary" type="submit">
+          Register
+        </button>
+
+        <p class="auth-footer">
+          Already have an account?
+          <a routerLink="/login">Sign in</a>
+        </p>
+      </form>
+    </main>
+
   </div>
 </section>
