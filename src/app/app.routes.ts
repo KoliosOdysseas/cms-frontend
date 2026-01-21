@@ -12,6 +12,7 @@ import { CourseEnrollments } from './features/courses/pages/course-enrollments/c
 
 import { authGuard } from './core/guards/auth.guard';
 
+// Application route definitions
 export const routes: Routes = [
   { path: '', component: HomeComponent },
 

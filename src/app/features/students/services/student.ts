@@ -11,7 +11,7 @@ import {
 export class StudentService {
   private http = inject(HttpClient);
 
-  // Στο swagger σου τα routes είναι τύπου /api/Course και /api/Teacher (singular, PascalCase)
+  // Base URL for the Student API
   private readonly baseUrl = 'https://localhost:7286/api/Student';
 
   getAll(): Observable<StudentReadDto[]> {

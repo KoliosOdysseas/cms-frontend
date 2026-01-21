@@ -9,6 +9,7 @@ import {
   CourseUpdateDto
 } from '../models/course.models';
 
+// Service for handling course-related API calls
 @Injectable({
   providedIn: 'root',
 })

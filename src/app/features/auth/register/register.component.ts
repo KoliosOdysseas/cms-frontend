@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
  templateUrl: './register.component.html'
   styleUrls: ['./register.component.scss']   // ✅ ΜΟΝΟ ΕΔΩ
 
-
+//Component decorator with metadata
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -31,7 +31,7 @@ export class RegisterComponent {
      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] ||
 '/courses';
   }
-
+// Method to handle form submission
   onSubmit(): void {
     if (!this.userName.trim() || !this.password.trim()) {
       this.error = 'Username and password are required.';

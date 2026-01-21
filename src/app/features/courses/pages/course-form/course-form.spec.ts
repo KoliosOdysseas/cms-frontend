@@ -1,4 +1,4 @@
-// course-form.spec.ts
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseForm } from './course-form';

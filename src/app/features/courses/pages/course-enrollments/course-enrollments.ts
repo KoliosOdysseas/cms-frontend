@@ -9,6 +9,7 @@ import { StudentService } from '../../../students/services/student';
 import { StudentReadDto } from '../../../../core/models/student.models';
 import { HttpErrorResponse } from '@angular/common/http';
 
+//
 @Component({
   selector: 'app-course-enrollments',
   standalone: true,

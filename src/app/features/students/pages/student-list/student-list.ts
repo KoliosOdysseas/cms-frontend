@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { StudentService } from '../../services/student';
 import { StudentReadDto } from '../../../../core/models/student.models';
 
+// Component to display and manage the list of students
 @Component({
   selector: 'app-student-list',
   standalone: true,

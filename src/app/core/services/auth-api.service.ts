@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// Define user roles
 export type UserRole = 'Admin' | 'Teacher' | 'Student';
 
 export interface RegisterRequest {
@@ -11,15 +12,17 @@ export interface RegisterRequest {
   RoleName: string;
 }
 
+// Interface for login request
 export interface LoginRequest {
   userName: string;
   password: string;
 }
 
+// Interface for authentication response
 export interface AuthResponse {
   token: string; 
 }
-
+// Service for handling authentication API calls
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
   private readonly baseUrl = 'https://localhost:7286/api/Auth';

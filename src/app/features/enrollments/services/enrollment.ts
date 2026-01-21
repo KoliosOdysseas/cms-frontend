@@ -9,6 +9,7 @@ export interface EnrollmentCreateDto {
   courseId: number;
 }
 
+// Service to manage enrollments
 @Injectable({ providedIn: 'root' })
 export class EnrollmentService {
   private http = inject(HttpClient);

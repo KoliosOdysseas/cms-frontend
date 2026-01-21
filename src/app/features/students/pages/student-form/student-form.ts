@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StudentService } from '../../services/student';
 import { StudentCreateDto, StudentUpdateDto } from '../../../../core/models/student.models';
 
+// Component for creating and editing student records
 @Component({
   selector: 'app-student-form',
   standalone: true,
